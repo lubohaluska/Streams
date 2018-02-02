@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,14 +48,31 @@ namespace Streams1
                 }
 
 
-                using (StreamWriter writer = new StreamWriter(@"C:\Temp\KOPIE.TXT", true))
+                using (StreamWriter writer = new StreamWriter(@"C:\Temp\KOPIE.TXT", true))  //true zabezpeci ze pridava do suboru
                 {
+                    writer.WriteLine();
                     //chceme aby neprepisoval ale do neho pridaval a pridal Velke pismena
                     writer.Write(textBox2.Text.ToUpper());
 
                 }
 
             }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            WebClient webClient = new WebClient();
+            using (StreamReader htmlReader = new StreamReader(webClient.OpenRead(textBox3.Text)))
+            {
+                textBox2.Text = htmlReader.ReadToEnd();
+
+
+            }
+
+            ZipFile.CreateFromDirectory(@"C:\Temp\", @"C:\Temp1\KOPIE.ZIP"); //cely temp zazipuje do Temp1
+
+
 
         }
     }
