@@ -46,6 +46,12 @@ namespace Streams1
                 }
 
 
+                using (StreamWriter writer = new StreamWriter(@"C:\Temp\KOPIE.TXT", true))
+                {
+                    //chceme aby neprepisoval ale do neho pridaval a pridal Velke pismena
+                    writer.Write(textBox2.Text.ToUpper());
+
+                }
 
             }
 
